@@ -1,0 +1,25 @@
+# Dependencies
+markdown:               redcarpet
+
+redcarpet:
+    extensions:         ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "subscript"]
+
+kramdown:
+    extensions:         ["mathjax"]
+
+highlighter:            pygments
+
+# Permalinks
+permalink:              pretty
+relative_permalinks:    true
+
+# Setup
+title:                  One Week, One Problem, One Algorithm
+baseurl:                /Ozone/
+
+author:
+    name:               "Dhananjoy Biswas"
+    email:              "ebappa1971@gmail.com"
+
+github:
+    repo:               https://github.com/Corei13/Ozone

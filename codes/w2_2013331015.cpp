@@ -1,0 +1,70 @@
+/*
+ID: mridul11
+PROG: gift1
+LANG: C++
+*/
+
+#include<cstdio>
+#include<sstream>
+#include<cstdlib>
+#include<cctype>
+#include<cmath>
+#include<algorithm>
+#include<set>
+#include<queue>
+#include<stack>
+#include<list>
+#include<iostream>
+#include<fstream>
+#include<numeric>
+#include<string>
+#include<vector>
+#include<cstring>
+#include<map>
+#include<iterator>
+using namespace std;
+
+int main ()
+{
+    int np;
+    int t=0;
+    freopen("gift1.in", "r", stdin);
+    freopen("gift1.out", "w", stdout);
+    scanf("%d", &np);
+    struct group
+    {
+        char name[20];
+        int spe;
+        int rec;
+    } g[12]= {0, 0, 0};
+    int i;
+    for(i=0; i<np; i++)
+        scanf ("%s", g[i].name);
+    char giver[100], receiver[100];
+    int amou, k;
+    for(k=0; k<np; k++)
+    {
+        scanf("%s", giver);
+        scanf("%d", &amou);
+        i=0;
+        while(strcmp(g[i].name, giver)!=0) i++;
+        g[i].spe+=amou;
+        int nor;
+        scanf("%d", &nor);
+        if(nor==0) g[i].rec+=amou;
+        else g[i].rec+=amou-((amou/nor)*nor);
+        for(int j=0; j<nor; j++)
+        {
+            scanf("%s", receiver);
+            i=0;
+            while(strcmp(g[i].name, receiver)!=0) i++;
+            g[i].rec+=(amou/nor);
+        }
+    }
+
+    for (i=0; i<np; i++)
+        printf("%s %d\n", g[i].name, g[i].rec-g[i].spe);
+
+    return 0;
+}
+

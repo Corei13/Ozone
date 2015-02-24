@@ -1,0 +1,76 @@
+<script type="text/javascript">
+  console.log({{site | jsonify}});
+  site = {{site | jsonify}};
+  console.log({{page | jsonify}});
+</script>
+
+<div class="sidebar">
+  <div class="container">
+    <nav class="sidebar-nav">
+      <b class="sidebar-nav-item">
+          <a class = "active" href="{{ site.baseurl }}">
+            <h4>Home</h4>
+          </a>
+        </b>
+      
+      {% if page.author %}
+        {% for author in site.data.authors %}
+          {% assign skip = true %}
+          {% for _page in site.pages %}
+            {% if _page.layout == 'author' and _page.author == author[0] and _page.problems != empty %}
+              {% assign skip = false %}
+            {% endif %}
+          {% endfor %}
+          {% if skip != true %}
+            <b class="sidebar-nav-item">
+              <a class="{% if author[0] == page.author %} active {% endif %}" href="{{ site.baseurl }}/author/{{author[0]}}">
+                {{ author[1] }}
+              </a>
+            </b>
+            {% if author[0] == page.author %}
+              {% for problem in page.problems %}
+                <a class="sidebar-nav-item" href="#{{page.author}}.{{problem}}">
+                  Week #{{problem}} - {{site.data.problems[problem].title}}
+                </a>
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if page.problem %}
+        {% for problem in site.data.problems %}
+          {% assign skip = true %}
+          {% for _page in site.pages %}
+            {% if _page.layout == 'problem' and _page.problem == problem[0] and _page.authors != empty %}
+              {% assign skip = false %}
+            {% endif %}
+          {% endfor %}
+          {% if skip != true %}
+            <b class="sidebar-nav-item">
+              <a class="{% if problem[0] == page.problem %} active {% endif %}" href="{{ site.baseurl }}/problem/{{problem[0]}}">
+                Week #{{problem[0]}} - {{problem[1].title}}
+              </a>
+            </b>
+            {% if problem[0] == page.problem %}
+              {% for author in page.authors %}
+                <a class="sidebar-nav-item" href="#{{author}}.{{page.problem}}">
+                  {{site.data.authors[author]}}
+                </a>
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+    </nav>
+  </div>
+  <div class="container sidebar-sticky" style="font-size:12px">
+    <a href = "{{ site.github.repo }}" target="_blank">
+      <img src="{{site.baseurl}}/public/github.png"/>
+    </a>
+    <div>Powered by <a href="https://github.com/poole/hyde" class="active">Hyde</a></div>
+  </div>
+</div>
+
+

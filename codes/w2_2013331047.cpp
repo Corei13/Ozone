@@ -1,0 +1,70 @@
+/*
+ID:fb/tuhinto1
+PROG: gift1
+LANG: C++
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+#define SET(a) memset(a,-1,sizeof(a))
+#define ALL(a) a.begin(),a.end()
+#define CLR(a) memset(a,0,sizeof(a))
+#define PB push_back
+#define PI acos(-1.0)
+#define max3(a,b,c) max(a,max(b,c))
+#define min3(a,b,c) min(a,min(b,c))
+#define READ freopen("input.txt", "r", stdin)
+#define WRITE freopen("output.txt", "w", stdout)
+#define LL long long
+
+#define S(a) scanf("%d",&a)
+#define S2(a,b) scanf("%d%d",&a,&b)
+#define KS printf("Case %d: ",kk++)
+#define sf scanf
+#define pf printf
+
+int main()
+{
+    freopen("gift1.in","r",stdin);
+    freopen("gift1.out","w",stdout);
+    map<string,int> gift;
+    char ch[200][100];
+    string name,give;
+    int per,i,mon,n,c=0;
+    while(sf("%d",&per)==1)
+    {
+        if(c>0) pf("\n");
+        for(i=0; i<per; i++)
+        {
+            sf("%s",ch[i]);
+            name=ch[i];
+            gift[name]=0;
+        }
+        for(i=0; i<per; i++)
+        {
+            cin>>name;
+            sf("%d%d",&mon,&n);
+            if(n>0)
+            {
+                gift[name]-=mon;
+                gift[name]+=mon%n;
+                mon=mon/n;
+                while(n--)
+                {
+                    cin>>give;
+                    gift[give]+=mon;
+
+                }
+            }
+
+        }
+        for(i=0; i<per; i++)
+        {
+            pf("%s %d\n",ch[i],gift[ch[i]]);
+        }
+        c++;
+
+    }
+
+    return 0;
+}
