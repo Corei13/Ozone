@@ -9,11 +9,12 @@
   <title>
     {% if page.author != null %}
         {{ site.data.authors[page.author] }}
+        &middot;
     {% endif %}
     {% if page.problem != null %}
         {{ site.data.problems[page.problem].title }}
+        &middot;
     {% endif %}
-    &middot; 
     {{ site.title }}
   </title>
 

@@ -7,11 +7,13 @@
 <div class="sidebar">
   <div class="container">
     <nav class="sidebar-nav">
-      <b class="sidebar-nav-item">
+      {% if page.title != 'Home' %}
+        <b class="sidebar-nav-item">
           <a class = "active" href="{{ site.baseurl }}">
             <h4>Home</h4>
           </a>
         </b>
+      {% endif %}
       
       {% if page.author %}
         {% for author in site.data.authors %}
