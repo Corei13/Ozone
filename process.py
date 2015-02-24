@@ -1,4 +1,4 @@
-import os, re, sys, json, shutil
+import os, re, sys, json, shutil, pyastyle
 
 r = re.compile('w([0-9]+)_([0-9]{10}).([a-z]+)')
 
@@ -11,6 +11,22 @@ def mkdir(*path):
     directory = os.path.join(*path)
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+def format_code(content):
+    args = ('pad-oper', 'pad-first-paren-out', 'add-brackets', 'close-templates')
+    kwargs = {
+        'style':            'java',
+        'align-pointer':    'type',
+        'align-reference':  'type'
+    }
+    options = []
+    for arg in args:
+        options.append("--%s" % arg)
+
+    for kwarg in kwargs.items():
+        options.append("--%s=%s" % kwarg)
+
+    return pyastyle.format(content, ' '.join(options))
 
 
 def insert(src, files):
@@ -32,7 +48,7 @@ def insert(src, files):
             mkdir('author', str(author))
             mkdir('problem', problem)
 
-            content = open(os.path.join(src, filename)).read()
+            content = format_code(open(os.path.join(src, filename), 'rU').read())
             insert_file(path="%s/%s/%s.md" % ('author', author, problem),
                 template='code', problem=problem,
                 content=content, lang=lang, author=author)
