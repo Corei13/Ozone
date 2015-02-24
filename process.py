@@ -1,4 +1,4 @@
-import os, re, sys, json
+import os, re, sys, json, shutil
 
 r = re.compile('w([0-9]+)_([0-9]{10}).([a-z]+)')
 
@@ -48,9 +48,11 @@ def insert(src, files):
         insert_file(path="%s/%s/index.md" % ('problem', problem),
             template='problem', problem=problem, authors=authors)
 
-src = sys.argv[1]
+src = 'codes'
 
+shutil.rmtree('author')
 mkdir('author')
+shutil.rmtree('problem')
 mkdir('problem')
 
 insert(src, os.listdir(src))
