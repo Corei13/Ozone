@@ -1,0 +1,53 @@
+/*
+ID: hmdjaki1
+PROG: gift1
+LANG: C++
+*/
+#include <bits/stdc++.h>
+#include <map>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <iostream>
+using namespace std;
+map < string , int > mp1;
+map < int , string > mp2;
+int cost[50000];
+int main()
+{
+    ofstream fout ("gift1.out");
+    ifstream fin ("gift1.in");
+    //freopen("test.in","r",stdin);
+    //freopen("test.out","w",stdout);
+    int i,j,k=0,l,p,m,n,ans,sum;
+    string s1,s2;
+    fin>>n;
+        for(i=0;i<n;i++)
+        {
+            fin>>s1;
+            mp1[s1]=i;
+            mp2[mp1[s1]]=s1;
+            cost[mp1[s1]]=0;
+        }
+        for(i=0;i<n;i++)
+        {
+            fin>>s1>>sum>>m;
+            if(m!=0)
+            {
+                 ans=sum/m;
+            }
+            while(m--)
+            {
+                fin>>s2;
+                cost[mp1[s2]]+=ans;
+                cost[mp1[s1]]-=ans;
+            }
+        }
+       /* if(k!=0)
+           printf("\n");*/
+        for(i=0;i<n;i++)
+            fout<<mp2[i]<<" "<<cost[i]<<endl;
+        k=1;
+    return 0;
+}
+
